@@ -49,8 +49,17 @@ module LongTermStorage
 
     protected
     def url_to_object url
-      split_url = url.split '/'
-      return split_url[3], URI.unescape(split_url[4..-1].join('/'))
+      begin
+        matches = url.match(/\/\/(.*?)\.s3\.amazonaws\.com\/(.*)/)
+        if matches.nil?
+          split_url = url.split '/'
+          return split_url[3], URI.unescape(split_url[4..-1].join('/'))
+        else
+          return matches[1], matches[2]
+        end
+      rescue
+        raise "Invalid URL #{url}"
+      end
     end
 
   end
