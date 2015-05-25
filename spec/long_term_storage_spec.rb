@@ -6,7 +6,10 @@ describe LongTermStorage do
   let(:incorrectly_initialized) { LongTermStorage::LongTermStorage.new }
   let(:test_url) { 'https://s3.amazonaws.com/vesper-lts-development/wawa' }
   let(:test_url_bucket_dns) { 'https://vesper-lts-development.s3.amazonaws.com/wawa' }
+  let(:test_url_urlencoded) { 'https://s3.amazonaws.com/vesper-lts-development/wa%26wa' } # %26 = "&"
   let(:public_url_to_object) { LongTermStorage::LongTermStorage.send(:public, :url_to_object) }
+
+
 
   it "should respond to store" do
     expect(correctly_initialized).to respond_to(:store)
@@ -42,5 +45,11 @@ describe LongTermStorage do
     public_url_to_object
     expect(correctly_initialized.url_to_object test_url)
       .to eq(['vesper-lts-development','wawa'])
+  end
+
+  it "should correctly urldecode the key" do
+    public_url_to_object
+    expect(correctly_initialized.url_to_object test_url_urlencoded)
+      .to eq(['vesper-lts-development','wa&wa'])
   end
 end
