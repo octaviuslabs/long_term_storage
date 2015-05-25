@@ -55,7 +55,7 @@ module LongTermStorage
           split_url = url.split '/'
           return split_url[3], URI.unescape(split_url[4..-1].join('/'))
         else
-          return matches[1], matches[2]
+          return matches[1], URI.unescape(matches[2])
         end
       rescue
         raise "Invalid URL #{url}"
