@@ -1,6 +1,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'account_delta'
+require 'long_term_storage'
 
 Gem::Specification.new do |spec|
   spec.name          = "long_term_storage"
