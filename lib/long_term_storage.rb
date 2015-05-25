@@ -55,3 +55,5 @@ module LongTermStorage
 
   end
 end
+
+require_relative 'long_term_storage/version'
