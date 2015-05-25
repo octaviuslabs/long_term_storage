@@ -10,12 +10,35 @@ GEM
     aws-sdk-resources (2.0.45)
       aws-sdk-core (= 2.0.45)
     builder (3.2.2)
+    coderay (1.1.0)
+    diff-lcs (1.2.5)
     jmespath (1.0.2)
       multi_json (~> 1.0)
+    method_source (0.8.2)
     multi_json (1.11.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aws-sdk (~> 2)
+  pry
+  rspec
