@@ -12,6 +12,16 @@ module LongTermStorage
       @s3 = Aws::S3::Resource.new
     end
 
+    def get_location args={}
+      path = args.fetch(:path) { raise "Cannot url without path"}
+
+      return {
+        url: @s3.bucket(@bucket_name).object(path).public_url,
+        bucket: @bucket_name,
+        path: path
+      }
+    end
+
     def store args={}
       # Parse/validate input
       path = args.fetch(:path) { raise "Upload requires path" }
@@ -24,7 +34,8 @@ module LongTermStorage
       upload_target.put(
         content_type: 'application/json',
         acl: 'authenticated-read',
-        body: contents
+        body: contents,
+        server_side_encryption: :aes256
       )
 
       return {
@@ -46,6 +57,9 @@ module LongTermStorage
       s3_client = Aws::S3::Client.new
       s3_client.get_object(bucket: bucket_name, key: key).body.read
     end
+
+    # We will eventually want to add policy_url to this for generating
+    # temporary policy URL's consumable by client devices.
 
     protected
     def url_to_object url
