@@ -35,7 +35,7 @@ module LongTermStorage
         content_type: 'application/json',
         acl: 'authenticated-read',
         body: contents,
-        server_side_encryption: :aes256
+        server_side_encryption: :AES256
       )
 
       return {
